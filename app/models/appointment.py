@@ -1,5 +1,6 @@
 from app import db
 
+
 class Appointment(db.Model):
     __tablename__ = 'appointments'
 
@@ -8,6 +9,10 @@ class Appointment(db.Model):
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctors.id'), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(20), nullable=False, default='pending')
+
+
+    is_checked_in = db.Column(db.Boolean, default=False)  # Track check-in status
+    is_canceled = db.Column(db.Boolean, default=False)  # Track cancellation status
 
     def __init__(self, patient_id, doctor_id, date, status='pending'):
         self.patient_id = patient_id
